@@ -807,6 +807,17 @@ namespace NPOI.SS.UserModel
         ICellRange<ICell> RemoveArrayFormula(ICell cell);
 
         /// <summary>
+        /// Remove a Array Formula from this sheet.
+        /// </summary>
+        /// <param name="cell">any cell within Array Formula range</param>
+        /// <param name="keepCachedValue">If true, cached cell values will be preserved, otherwise cells will be blanked</param>
+        /// <returns>the <see cref="ICellRange{ICell}"/> of cells affected by this change</returns>
+        ICellRange<ICell> RemoveArrayFormula(ICell cell, bool keepCachedValue)
+        {
+            throw new NotSupportedException($"Sheets of type {GetType()} does not support {nameof(RemoveArrayFormula)} with {nameof(keepCachedValue)} argument.");
+        }
+
+        /// <summary>
         /// Checks if the provided region is part of the merged regions.
         /// </summary>
         /// <param name="mergedRegion">Region searched in the merged regions</param>

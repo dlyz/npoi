@@ -4293,7 +4293,14 @@ namespace NPOI.XSSF.UserModel
             return cr;
         }
 
+
         public ICellRange<ICell> RemoveArrayFormula(ICell cell)
+        {
+            return RemoveArrayFormula(cell, keepCachedValue: false);
+        }
+
+
+        public ICellRange<ICell> RemoveArrayFormula(ICell cell, bool keepCachedValue)
         {
             if (cell.Sheet != this)
             {
@@ -4307,7 +4314,14 @@ namespace NPOI.XSSF.UserModel
                     ICellRange<ICell> cr = GetCellRange(range);
                     foreach (ICell c in cr)
                     {
-                        c.SetCellType(CellType.Blank);
+                        if (keepCachedValue)
+                        {
+                            ((XSSFCell)c).RemoveFormulaForced();
+                        }
+                        else
+                        {
+                            c.SetCellType(CellType.Blank);
+                        }
                     }
                     return cr;
                 }

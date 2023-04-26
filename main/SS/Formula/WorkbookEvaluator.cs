@@ -101,7 +101,7 @@ namespace NPOI.SS.Formula
             return _collaboratingWorkbookEnvironment.GetWorkbookEvaluator(workbookName);
         }
 
-        internal IEvaluationWorkbook Workbook
+        public IEvaluationWorkbook Workbook
         {
             get
             {

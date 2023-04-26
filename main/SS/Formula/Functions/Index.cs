@@ -55,11 +55,11 @@ namespace NPOI.SS.Formula.Functions
             //{
             //    return e.GetErrorEval();
             //}
-            TwoDEval reference = ConvertFirstArg(arg0);
 
             int columnIx = 0;
             try
             {
+                TwoDEval reference = ConvertFirstArg(arg0);
                 int rowIx = ResolveIndexArg(arg1, srcRowIndex, srcColumnIndex);
 
                 if (!reference.IsColumn)
@@ -99,10 +99,10 @@ namespace NPOI.SS.Formula.Functions
             //{
             //    return e.GetErrorEval();
             //}
-            TwoDEval reference = ConvertFirstArg(arg0);
 
             try
             {
+                TwoDEval reference = ConvertFirstArg(arg0);
                 int columnIx = ResolveIndexArg(arg2, srcRowIndex, srcColumnIndex);
                 int rowIx = ResolveIndexArg(arg1, srcRowIndex, srcColumnIndex);
                 return GetValueFromArea(reference, rowIx, columnIx);
@@ -135,6 +135,11 @@ namespace NPOI.SS.Formula.Functions
             {
                 return (TwoDEval)firstArg;
             }
+            if (firstArg is ErrorEval errEval)
+            {
+                throw new EvaluationException(errEval);
+            }
+
             // else the other variation of thIs function takes an array as the first argument
             // it seems like interface 'ArrayEval' does not even exIst yet
             throw new Exception("Incomplete code - cannot handle first arg of type ("

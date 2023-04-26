@@ -547,6 +547,22 @@ namespace NPOI.XSSF.UserModel
             }
         }
 
+        /// <summary>
+        /// Like <see cref="RemoveFormula"/>, but does not check for an array formula.
+        /// </summary>
+        internal void RemoveFormulaForced()
+		{
+			if (CellType == CellType.Blank)
+				return;
+
+			((XSSFWorkbook)_row.Sheet.Workbook).OnDeleteFormula(this);
+			if (_cell.IsSetF())
+			{
+				((XSSFSheet)_row.Sheet).OnDeleteFormula(this, null);
+				_cell.unsetF();
+			}
+		}
+
         /**
          * package/hierarchy use only - reuse an existing evaluation workbook if available for caching
          *

@@ -81,6 +81,11 @@ namespace NPOI.XSSF.UserModel
             {
                 return CellValue.GetError(((ErrorEval)eval).ErrorCode);
             }
+            if (eval is BlankEval)
+            {
+                // excel returns 0 for empty cells, google returns actual blank cells
+				return new CellValue(0);
+            }
             throw new Exception("Unexpected eval class (" + eval.GetType().Name + ")");
         }
     }
