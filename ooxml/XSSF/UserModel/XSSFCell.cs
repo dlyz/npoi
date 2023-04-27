@@ -577,7 +577,7 @@ namespace NPOI.XSSF.UserModel
                 throw TypeMismatch(CellType.Formula, cellType, false);
 
             CT_CellFormula f = _cell.f;
-            if (IsPartOfArrayFormulaGroup && f == null)
+            if (IsPartOfArrayFormulaGroup && string.IsNullOrEmpty(f?.Value))
             {
                 XSSFCell cell = ((XSSFSheet)Sheet).GetFirstCellInArrayFormula(this);
                 return cell.GetCellFormula(fpb);
