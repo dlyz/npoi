@@ -624,11 +624,15 @@ namespace NPOI.SS.Formula
 
                 if (part1.IsRowOrColumn || part2.IsRowOrColumn)
                 {
-                    if (dotCount != 2)
+                    if (dotCount > 2)
                     {
                         throw new FormulaParseException("Dotted range (full row or column) expression '" + part1And2
                                 + "' must have exactly 2 dots.");
                     }
+                    else if (dotCount < 2)
+					{
+						return ParseNonRange(savePointer);
+					}
                 }
                 return CreateAreaRefParseNode(sheetIden, part1, part2);
             }
